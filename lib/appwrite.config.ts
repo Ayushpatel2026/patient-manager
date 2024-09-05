@@ -1,5 +1,7 @@
 import * as sdk from 'node-appwrite';
 
+// note that in appwrite, system generated field such as id's are used as $id
+
 export const {
     PROJECT_ID,
     API_KEY,
