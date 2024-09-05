@@ -5,7 +5,6 @@ import { getPatient } from "@/lib/actions/patient.actions";
 
 const NewAppointment = async ({params: {userId}} : SearchParamProps) => {
   const patient = await getPatient(userId)  
-  console.log(patient)
   return (
         <div className="flex h-screen max-h-screen">
           <section className="remove-scrollbar container my-auto">
