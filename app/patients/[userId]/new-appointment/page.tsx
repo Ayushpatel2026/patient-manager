@@ -4,7 +4,13 @@ import AppointmentForm from "@/components/forms/AppointmentForm";
 import { getPatient } from "@/lib/actions/patient.actions";
 
 const NewAppointment = async ({params: {userId}} : SearchParamProps) => {
+
+  /* TODO here we are getting patients by userId, but each user is able to create multiple patients in the database
+  should we allow this? if not, we need to find a way to get the patient by userId and not just the first patient
+  we need to find a way to get the patient by userId and not just the first patient*/
+
   const patient = await getPatient(userId)  
+  console.log("Patient", patient, userId, patient.$id)
   return (
         <div className="flex h-screen max-h-screen">
           <section className="remove-scrollbar container my-auto">
@@ -19,7 +25,7 @@ const NewAppointment = async ({params: {userId}} : SearchParamProps) => {
               <AppointmentForm
                 type="create"
                 userId={userId}
-                patientId={patient?.$id}
+                patientId={patient.$id!}
               />
               <p className="copyright mt-10 py-12">
                   Copyright 2024

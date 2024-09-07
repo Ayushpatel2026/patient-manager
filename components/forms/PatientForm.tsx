@@ -3,9 +3,7 @@ import React, { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Button } from "@/components/ui/button"
 import {Form} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
 import CustomFormField from "../CustomFormField"
 import SubmitButton from "../SubmitButton"
 import { UserFormValidation } from "@/lib/validation"
@@ -49,9 +47,9 @@ export default function PatientForm() {
 				phone
 			};
 
+      // TODO deal with already existing user and redirect them to a 'view your appointments' page
 			const user = await createUser(userData);
 		
-
 			if (user) {
 				router.push(`/patients/${user.$id}/register`);
 			}
