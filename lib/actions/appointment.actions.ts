@@ -1,7 +1,7 @@
 'use server'
 import { ID, Query } from "node-appwrite";
-import { APPOINTMENT_COLLECTION_ID, DATABASE_ID, databases } from "../appwrite.config";
-import { parseStringify } from "../utils";
+import { APPOINTMENT_COLLECTION_ID, DATABASE_ID, databases, messaging } from "../appwrite.config";
+import { formatDateTime, parseStringify } from "../utils";
 import { revalidatePath } from "next/cache";
 
 
@@ -82,11 +82,41 @@ export const updateAppointment = async ({appointmentId, userId, appointment, typ
     if (!updatedAppointment) {
       throw new Error("Appointment not found");
     }
-    // send notification to user
+    const scheduledMessage = `Your appointment has been scheduled for ${formatDateTime(appointment.schedule).dateTime} with Dr. ${appointment.primaryPhysician}.`;
+    const cancelledMessage = `We regret to inform you that your appointment with Dr. ${appointment.primaryPhysician} on ${formatDateTime(appointment.schedule).dateTime} has been cancelled for the following reason: ${appointment.cancellationReason}`;
+    // send notification to user via sms and email
+    const content = `Hi, it's CarePulse! ${type === 'schedule' ? `${scheduledMessage}` : `${cancelledMessage}`}`;
+
+    await sendSMSNotification(userId, content);
+
+    const subject = type === 'schedule' ? 'Appointment Scheduled' : 'Appointment Cancelled';
+
+    await sendEmailNotification(userId, subject, content);
 
     revalidatePath('/admin');
 
     return parseStringify(updatedAppointment);
+  }catch(e){
+    console.error(e)
+  }
+}
+
+export const sendSMSNotification = async (userId: string, content: string) => {
+  try{
+    const message = await messaging.createSms(ID.unique(), content,
+      [], 
+      [userId],
+    );
+  return parseStringify(message);
+  }catch(e){
+    console.error(e)
+  }
+}
+
+export const sendEmailNotification = async (userId: string, subject:string, content: string) => {
+  try{
+    const message = await messaging.createEmail(ID.unique(), subject, content, [], [userId])
+    return parseStringify(message);
   }catch(e){
     console.error(e)
   }
