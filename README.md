@@ -24,6 +24,7 @@ The **Patient Manager App** is a web-based platform that simplifies the manageme
 ### Frontend
 - **Next.js**: For building the web app with server-side rendering and routing.
 - **Tailwind CSS & Shadcn**: For styling and creating a clean, modern user interface.
+- **Zod**: Used for type validation in all patient and registration forms
 
 ### Backend
 - **Appwrite**: 
