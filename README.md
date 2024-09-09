@@ -28,13 +28,10 @@ The **Patient Manager App** is a web-based platform that simplifies the manageme
 ### Backend
 - **Appwrite**: 
   - **Database**: Manages patients, doctors, and appointment information.
-  - **Authentication**: Handles user login, registration, and role-based access control.
+  - **Authentication**: Handles user login and registration
 
 ### Messaging & Notifications
 - **Twilio API**: Sends SMS and email notifications to patients when their appointments are scheduled or modified (currently SMS notifications are only sent to verified phone numbers since I am using a trial Twilio account).
-
-## License
-This project is licensed under the MIT License.
 
 ## Contributing
 Feel free to submit issues and pull requests to improve the app.
