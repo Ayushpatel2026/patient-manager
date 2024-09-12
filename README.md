@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Patient Manager App
 
-First, run the development server:
+## Overview
+The **Patient Manager App** is a web-based platform that simplifies the management of patient appointments and records for clinics. It also allows patients to easily book appointments with their clinic and receive a notification if anything about thier appointment changes. Patients can securely register, request, update, and cancel their appointments, while clinics can manage appointments, schedule them, and notify patients using SMS and email via Twilio. The app is built using **Next.js**, **Appwrite** for backend services such as databases and user authentication, **Tailwind CSS** and **Shadcn** for an elegant user interface, and **Twilio** for messaging services.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### User Authentication
+- **Secure Login & Registration**: Patients can sign up and log in using a secure authentication system powered by Appwrite.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Patient Features
+- **Patient Registration Form**: New patients can register their details using a simple and intuitive form built using React Hook Forms.
+- **Appointment Requests and Management**: Patients can request new appointments by selecting their preferred doctor, timeslot and reason for appointment They can also view, update, or cancel their pending or confirmed appointments.
+- **Notification System**: Patients will receive SMS and email notifications when their appointments are scheduled or modified by the clinic admin.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Clinic Admin Features
+- **Admin Dashboard**: A special accesscode gives clinics access to an admin dashboard that displays all requested and pending appointments.
+- **Schedule Appointments**: Admins can view appointment requests and confirm appointments by scheduling them.
+- **Automatic Notifications**: Once an appointment is scheduled, both an SMS and an email are sent to the patient using Twilio.
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend
+- **Next.js**: For building the web app with server-side rendering and routing.
+- **Tailwind CSS & Shadcn**: For styling and creating a clean, modern user interface.
+- **Zod**: Used for type validation in all patient and registration forms
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Backend
+- **Appwrite**: 
+  - **Database**: Manages patients, doctors, and appointment information.
+  - **Authentication**: Handles user login and registration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Messaging & Notifications
+- **Twilio API**: Sends SMS and email notifications to patients when their appointments are scheduled or modified (currently SMS notifications are only sent to verified phone numbers since I am using a trial Twilio account).
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributing
+Feel free to submit issues and pull requests to improve the app.
